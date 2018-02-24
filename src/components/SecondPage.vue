@@ -28,16 +28,18 @@ export default {
   data() {
     return {
       msg: "Welcome to Your Vue.js App",
-      faorites: [
+      favorites: [
         { id: 1, name: "name1", type: "type1", link: "www.linkOne.com" },
-        { id: 1, name: "name1-a", type: "type1", link: "www.name1-a.com" },
-        { id: 1, name: "name3", type: "type3", link: "www.name3.com" },
-        { id: 1, name: "name4", type: "type4", link: "www.name4.com" }
+        { id: 2, name: "name1-a", type: "type1", link: "www.name1-a.com" },
+        { id: 3, name: "name3", type: "type3", link: "www.name3.com" },
+        { id: 4, name: "name4", type: "type4", link: "www.name4.com" }
       ]
     };
   },
+  created() {
+    this.getLocation();
+  },
   methods: {
-    onCreate() {},
     goBack() {
       this.$router.go(-1);
     },
@@ -47,12 +49,11 @@ export default {
     async getLocation() {
       console.log("got getLocation event");
 
-      const location = await Geolocation.getCurrentPosition({
-        enableHighAccuracy : true,
-        timeout : 3000,
-        maximumAge : 3000,        
+      let location = await Geolocation.getCurrentPosition({
+        enableHighAccuracy: true,
+        timeout: 30000,
       });
-      console.log(location);
+      console.log("location", location);
     }
   }
 };
