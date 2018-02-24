@@ -12,6 +12,9 @@ npm run dev
 # build for capacitor
 npm run build; npx capacitor copy
 
+# run in simulator
+npx capacitor open ios
+
 # build for production and view the bundle analyzer report
 npm run build --report
 
