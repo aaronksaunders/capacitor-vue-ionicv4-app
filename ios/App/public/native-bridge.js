@@ -1,9 +1,17 @@
+//# sourceURL=capacitor-runtime.js
+
 (function(win) {
   win.Capacitor = win.Capacitor || {
     Plugins: {}
   };
 
   var capacitor = Capacitor;
+
+  // Export Cordova if not defined
+  win.cordova = win.cordova || {};
+
+  // Add any legacy handlers to keep Cordova compat 100% good
+  addLegacyHandlers(win);
 
   capacitor.Plugins = capacitor.Plugins || {};
   
@@ -41,6 +49,11 @@
     capacitor.platform = 'ios';
   }
 
+  var useFallbackLogging = Object.keys(win.console).length === 0;
+  if(useFallbackLogging) {
+    win.console.warn('Advance console logging disabled.')
+  }
+
   // patch window.console and store original console fns
   var orgConsole = {};
   Object.keys(win.console).forEach(level => {
@@ -66,7 +79,7 @@
               }
               // convert to string
               return arg + '';
-            });
+          });
             capacitor.toNative('Console', 'log', {
               level,
               message: msgs.join(' ')
@@ -80,6 +93,29 @@
       };
     }
   });
+
+  function addLegacyHandlers(win) {
+    win.navigator.app = {
+      exitApp: function() {
+        capacitor.toNative("App", "exitApp", {}, null);
+      }
+    }
+    let documentAddEventListener = document.addEventListener;
+    document.addEventListener = function() {
+      var name = arguments[0];
+      var handler = arguments[1];
+      if (name === 'deviceready') {
+        setTimeout(function() {
+          handler && handler();
+        });
+      } else if (name === 'backbutton') {
+        // Add a dummy listener so Capacitor doesn't do the default
+        // back button action
+        Capacitor.Plugins.App && Capacitor.Plugins.App.addListener('backButton', function() {});
+      }
+      return documentAddEventListener.apply(document, arguments);
+    }
+  }
 
   /**
    * Send a plugin method call to the native layer
@@ -180,6 +216,22 @@
     delete result.error;
   };
 
+  capacitor.logJs = function(message, level) {
+    switch (level) {
+      case 'error':
+        console.error(message);
+        break;
+      case 'warn':
+        console.warn(message);
+        break;
+      case 'info':
+        console.info(message);
+        break;
+      default:
+        console.log(message);
+    }
+  }
+
   capacitor.withPlugin = function withPlugin(_pluginId, _fn) {
   };
 
@@ -220,6 +272,18 @@
       callbackId,
       eventName
     }, callback);
+  }
+
+  capacitor.triggerEvent = function(eventName, target, data) {
+    var event = new CustomEvent(eventName, { detail: data || {} });
+    if (target === "document") {
+      document.dispatchEvent(event);
+    } else if (target === "window") {
+      window.dispatchEvent(event);
+    } else {
+      const targetEl = document.querySelector(target);
+      targetEl && targetEl.dispatchEvent(event);
+    }
   }
 
   capacitor.handleError = function(error) {
@@ -269,31 +333,50 @@
   };
 
   capacitor.logToNative = function(call) {
-    var c = orgConsole;
-    c.groupCollapsed(`%cnative %c${call.pluginId}.${call.methodName} (#${call.callbackId})`,
-    `font-weight: lighter; color: gray`, `font-weight: bold; color: #000`);
-    c.dir(call);
-    c.groupEnd();
-    //orgConsole.log('LOG TO NATIVE', call);
+    if(!useFallbackLogging) {
+        var c = orgConsole;
+        c.groupCollapsed(`%cnative %c${call.pluginId}.${call.methodName} (#${call.callbackId})`,
+            `font-weight: lighter; color: gray`, `font-weight: bold; color: #000`);
+        c.dir(call);
+        c.groupEnd();
+        //orgConsole.log('LOG TO NATIVE', call);
+    } else {
+        win.console.log('LOG TO NATIVE: ', call);
+        if (capacitor.isNative) {
+            try {
+                capacitor.toNative('Console', 'log', {message: JSON.stringify(call)});
+            } catch (e) {
+                win.console.log('Error converting/posting console messages');
+            }
+        }
+    }
   }
 
   capacitor.logFromNative = function(result) {
-    var c = orgConsole;
+      if(!useFallbackLogging) {
+          var c = orgConsole;
 
-    const success = result.success === true;
+          var success = result.success === true;
 
-    const tagStyles = success ? `font-style: italic; font-weight: lighter; color: gray` :
-      `font-style: italic; font-weight: lighter; color: red`;
+          var tagStyles = success ? 'font-style: italic; font-weight: lighter; color: gray' :
+              'font-style: italic; font-weight: lighter; color: red';
 
-    c.groupCollapsed(`%cresult %c${result.pluginId}.${result.methodName} (#${result.callbackId})`,
-      tagStyles,
-      `font-style: italic; font-weight: bold; color: #444`);
-    if (result.success === false) {
-      c.error(result.error);
-    } else {
-      c.dir(result.data);
-    }
-    c.groupEnd();
+          c.groupCollapsed('%cresult %c' + result.pluginId + '.' + result.methodName + ' (#' + result.callbackId + ')',
+              tagStyles,
+              'font-style: italic; font-weight: bold; color: #444');
+          if (result.success === false) {
+              c.error(result.error);
+          } else {
+              c.dir(result.data);
+          }
+          c.groupEnd();
+      } else {
+          if (result.success === false) {
+              win.console.error(result.error);
+          } else {
+              win.console.log(result.data);
+          }
+      }
   }
 
   capacitor.uuidv4 = function() {
@@ -438,7 +521,7 @@
     var copyButton = el.querySelector('#_avc-copy-error');
     copyButton.addEventListener('click', function(e) {
       if(lastError) {
-        Capacitor.Plugins.Clipboard.set({
+        Capacitor.Plugins.Clipboard.write({
           string: lastError.message + '\n' + lastError.stack
         });
       }

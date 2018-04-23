@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import { Capacitor, Plugins } from "@capacitor/core";
-const { Camera } = Plugins;
+import { Plugins, Capacitor } from "@capacitor/core";
+const { Camera, CameraSource, CameraResultType } = Plugins;
 
 export default {
   name: "HelloWorld",
@@ -34,24 +34,32 @@ export default {
       this.$router.push("/second-page");
     },
     async takePicture() {
-      let isAvailable = Capacitor.isPluginAvailable("Camera");
+      alert("button clicked");
+
+      let isAvailable = true;
 
       if (!isAvailable) {
         // Have the user upload a file instead
-        console.log("No Camera Aailable")
+        alert("No Camera Aailable");
       } else {
         // Otherwise, make the call:
-        console.log("got click event");
-        const image = await Camera.getPhoto({
-          quality: 90,
-          allowEditing: true,
-          resultType: "base64"
-        });
-        // image.base64_data will contain the base64 encoded result as a JPEG, with the data-uri prefix added
-        this.imageUrl = image.base64_data;
-        // can be set to the src of an image now
+        alert("got click event");
+        try {
+          const image = await Camera.getPhoto({
+            quality: 90,
+            allowEditing: true,
+            resultType: CameraResultType.Base64,
+            source: CameraSource.Prompt
+          });
+          alert(image);
+          // image.base64_data will contain the base64 encoded result as a JPEG, with the data-uri prefix added
+          this.imageUrl = image.base64_data;
+          // can be set to the src of an image now
 
-        console.log(image);
+          console.log(image);
+        } catch (e) {
+          alert(e);
+        }
       }
     }
   }
