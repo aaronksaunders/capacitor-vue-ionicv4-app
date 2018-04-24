@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header>
       <ion-toolbar class="toolbar-md-primary">
-        <ion-title>TodoList</ion-title>
+        <ion-title>Capacitor-VueJS</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content padding>
@@ -18,8 +18,13 @@
 </template>
 
 <script>
-import { Plugins, Capacitor } from "@capacitor/core";
-const { Camera, CameraSource, CameraResultType } = Plugins;
+import {
+  Plugins,
+  Capacitor,
+  CameraSource,
+  CameraResultType
+} from "@capacitor/core";
+const { Camera } = Plugins;
 
 export default {
   name: "HelloWorld",
@@ -34,7 +39,6 @@ export default {
       this.$router.push("/second-page");
     },
     async takePicture() {
-      alert("button clicked");
 
       let isAvailable = true;
 
@@ -43,7 +47,7 @@ export default {
         alert("No Camera Aailable");
       } else {
         // Otherwise, make the call:
-        alert("got click event");
+
         try {
           const image = await Camera.getPhoto({
             quality: 90,
@@ -51,14 +55,14 @@ export default {
             resultType: CameraResultType.Base64,
             source: CameraSource.Prompt
           });
-          alert(image);
+          console.log("image", image);
           // image.base64_data will contain the base64 encoded result as a JPEG, with the data-uri prefix added
           this.imageUrl = image.base64_data;
           // can be set to the src of an image now
 
           console.log(image);
         } catch (e) {
-          alert(e);
+          console.log("error", e);
         }
       }
     }

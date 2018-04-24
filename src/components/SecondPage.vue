@@ -5,16 +5,13 @@
         <ion-buttons slot="start" @click="goBack()">
           <ion-icon name="arrow-back" style="font-size: 25px;"></ion-icon>
         </ion-buttons>
-        <ion-title>TodoList</ion-title>
+        <ion-title>Capacitor-VueJS</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content padding>
       <h2>This is the Second Page</h2>
-      <ion-item v-for="f in favorites" :key="f.id">
-        <ion-label full style="color:black" @click="showDetail(f)">
-          [ {{f.type}} ] {{f.name}} - {{f.link}}</ion-label>
-        <!-- <button ion-button @click="removeFromFavorites(f.id)">DELETE</button> -->
-      </ion-item>
+      <div>Showing the use of the location plugin and the vue-router for changing pages in the application</div>
+      <pre>{{location}}</pre>
     </ion-content>
   </ion-page>
 </template>
@@ -28,12 +25,7 @@ export default {
   data() {
     return {
       msg: "Welcome to Your Vue.js App",
-      favorites: [
-        { id: 1, name: "name1", type: "type1", link: "www.linkOne.com" },
-        { id: 2, name: "name1-a", type: "type1", link: "www.name1-a.com" },
-        { id: 3, name: "name3", type: "type3", link: "www.name3.com" },
-        { id: 4, name: "name4", type: "type4", link: "www.name4.com" }
-      ]
+      location: {}
     };
   },
   created() {
@@ -51,9 +43,10 @@ export default {
 
       let location = await Geolocation.getCurrentPosition({
         enableHighAccuracy: true,
-        timeout: 30000,
+        timeout: 30000
       });
       console.log("location", location);
+      this.location = location;
     }
   }
 };
