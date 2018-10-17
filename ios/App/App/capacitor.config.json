@@ -1,3 +1,5 @@
 {
-  "webDir": "dist"
+  "webDir": "dist",
+  "appId": "com.in3dc.myapp",
+  "appName": "My App"
 }
