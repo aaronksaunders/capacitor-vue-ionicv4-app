@@ -1,8 +1,8 @@
 <template >
-  <ion-page>
+  <div class="ion-page">
     <ion-header>
       <ion-toolbar class="toolbar-md-primary">
-        <ion-title>Capacitor-VueJS</ion-title>
+        <ion-title>Capacitor - VueJS</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content padding>
@@ -14,7 +14,7 @@
         Next Page
       </ion-button>
     </ion-content>
-  </ion-page>
+  </div>
 </template>
 
 <script>
