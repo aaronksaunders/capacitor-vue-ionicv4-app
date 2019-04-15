@@ -1,5 +1,9 @@
 # A vueJS app using Ionic Components & Capacitor
 
+#### More complete example
+this repo is on my list to update this month, until then... https://github.com/aaronksaunders/icon-vue
+
+----
 ## Running Project
 
 ``` bash
