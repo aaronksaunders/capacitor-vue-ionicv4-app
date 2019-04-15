@@ -1,5 +1,5 @@
 <template >
-  <ion-page>
+  <div class="ion-page">
     <ion-header>
       <ion-toolbar class="toolbar-md-primary">
         <ion-buttons slot="start" @click="goBack()">
@@ -13,7 +13,7 @@
       <div>Showing the use of the location plugin and the vue-router for changing pages in the application</div>
       <pre>{{location}}</pre>
     </ion-content>
-  </ion-page>
+  </div>
 </template>
 
 <script>
@@ -21,7 +21,7 @@ import { Plugins, GeolocationOptions } from "@capacitor/core";
 const { Geolocation } = Plugins;
 
 export default {
-  name: "SecondPage",
+  name: "GeolocationPage",
   data() {
     return {
       msg: "Welcome to Your Vue.js App",
@@ -45,8 +45,8 @@ export default {
         enableHighAccuracy: true,
         timeout: 30000
       });
-      console.log("location", location);
-      this.location = location;
+      console.log("location", location.coords);
+      this.location = location.coords.latitude + " " + location.coords.longitude ;
     }
   }
 };

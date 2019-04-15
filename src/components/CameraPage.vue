@@ -27,7 +27,7 @@ import {
 const { Camera } = Plugins;
 
 export default {
-  name: "HelloWorld",
+  name: "CameraPage",
   data() {
     return {
       msg: "Welcome to Your Vue.js App",
@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     nextPage() {
-      this.$router.push("/second-page");
+      this.$router.push("/geo-location-page");
     },
     async takePicture() {
 
