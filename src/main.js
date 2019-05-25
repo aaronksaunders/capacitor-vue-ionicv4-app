@@ -6,6 +6,7 @@ import VeeValidate from "vee-validate";
 import App from "./App.vue";
 import router from "./router";
 
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
 
 
 Vue.config.productionTip = false;
@@ -18,3 +19,5 @@ Vue.use(VeeValidate);
     router,
     render: h => h(App)
   }).$mount("#app");
+
+  defineCustomElements(window);

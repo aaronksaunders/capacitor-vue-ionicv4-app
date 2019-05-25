@@ -12,6 +12,7 @@
     "@capacitor/core": "^1.0.0",
     "@capacitor/ios": "^1.0.0",
     "@ionic/core": "^4.4.2",
+    "@ionic/pwa-elements": "^1.2.7",
     "@ionic/vue": "0.0.4",
     "core-js": "^2.6.8",
     "firebase": "^5.11.1",
