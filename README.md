@@ -5,6 +5,35 @@
 - Camera Plugin
 - Live Reload Is Enabled
 
+### Camera Working In PWA/Website
+
+- see https://capacitor.ionicframework.com/docs/pwa-elements/
+
+Installed PWA Elements
+```
+npm install @ionic/pwa-elements
+```
+Then opened up the `main.js` file in my vue project and made the following changes
+```javascript
+import { defineCustomElements } from '@ionic/pwa-elements/loader'; // <== NEW
+
+
+Vue.config.productionTip = false;
+
+Vue.use(Ionic);
+Vue.use(VeeValidate);
+// check if there is actually a user that has been
+// saved by previous instance of Firebase...
+  new Vue({
+    router,
+    render: h => h(App)
+  }).$mount("#app");
+
+  defineCustomElements(window);  // <== NEW
+
+```
+and then the magic happened
+
 ### Important - Live Reload
 For this project to work, I am runninng the vue application on local server and the ios project is loading the applictaion from there.
 
