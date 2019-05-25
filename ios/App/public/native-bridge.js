@@ -135,6 +135,22 @@
     return this.Plugins.hasOwnProperty(name);
   }
 
+  capacitor.convertFileSrc = function convertFileSrc(url) {
+    if (!url) {
+      return url;
+    }
+    if (url.startsWith('/')) {
+      return window.WEBVIEW_SERVER_URL + '/_capacitor_file_' + url;
+    }
+    if (url.startsWith('file://')) {
+      return window.WEBVIEW_SERVER_URL + url.replace('file://', '/_capacitor_file_');
+    }
+    if (url.startsWith('content://')) {
+      return window.WEBVIEW_SERVER_URL + url.replace('content:/', '/_capacitor_content_');
+    }
+    return url;
+  }
+
   /**
    * Send a plugin method call to the native layer
    */
@@ -292,10 +308,28 @@
     }, callback);
   }
 
+  capacitor.createEvent = function(type, data) {
+    var event = document.createEvent('Events');
+    event.initEvent(type, false, false);
+    if (data) {
+      for (var i in data) {
+        if (data.hasOwnProperty(i)) {
+          event[i] = data[i];
+        }
+      }
+    }
+    return event;
+  }
+
   capacitor.triggerEvent = function(eventName, target, data) {
-    var event = new CustomEvent(eventName, { detail: data || {} });
+    var eventData = data || {};
+    var event = this.createEvent(eventName, eventData);
     if (target === "document") {
-      document.dispatchEvent(event);
+      if (cordova.fireDocumentEvent) {
+        cordova.fireDocumentEvent(eventName, eventData);
+      } else {
+        document.dispatchEvent(event);
+      }
     } else if (target === "window") {
       window.dispatchEvent(event);
     } else {
@@ -504,19 +538,7 @@
   }
 
   win.Ionic.WebView.convertFileSrc = function(url) {
-    if (!url) {
-      return url;
-    }
-    if (url.startsWith('/')) {
-      return window.WEBVIEW_SERVER_URL + '/_capacitor_file_' + url;
-    }
-    if (url.startsWith('file://')) {
-      return window.WEBVIEW_SERVER_URL + url.replace('file://', '/_capacitor_file_');
-    }
-    if (url.startsWith('content://')) {
-      return window.WEBVIEW_SERVER_URL + url.replace('content:/', '/_capacitor_content_');
-    }
-    return url;
+    return Capacitor.convertFileSrc(url);
   }
 
 })(window);

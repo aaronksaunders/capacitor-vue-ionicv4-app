@@ -52,12 +52,12 @@ export default {
           const image = await Camera.getPhoto({
             quality: 90,
             allowEditing: true,
-            resultType: CameraResultType.Base64,
+            resultType: CameraResultType.DataUrl,
             source: CameraSource.Prompt
           });
           console.log("image", image);
           // image.base64_data will contain the base64 encoded result as a JPEG, with the data-uri prefix added
-          this.imageUrl = image.base64_data;
+          this.imageUrl = image.dataUrl;
           // can be set to the src of an image now
 
           console.log(image);
