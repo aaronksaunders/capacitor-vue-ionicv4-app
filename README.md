@@ -34,7 +34,10 @@ Vue.use(VeeValidate);
 ```
 and then the magic happened 
 
+<p align="center">
+<img src="https://raw.githubusercontent.com/aaronksaunders/capacitor-vue-ionicv4-app/master/Screen%20Shot%202019-05-25%20at%204.57.18%20PM.png" width='40%'>
 <img src="https://raw.githubusercontent.com/aaronksaunders/capacitor-vue-ionicv4-app/master/Screen%20Shot%202019-05-25%20at%204.49.02%20PM.png" width='40%'>
+  </p>
 
 ### Important - Live Reload
 For this project to work, I am runninng the vue application on local server and the ios project is loading the applictaion from there.
