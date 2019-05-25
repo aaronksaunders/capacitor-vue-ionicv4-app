@@ -1,6 +1,12 @@
-# my-vue-app
+# VueJS Ionic Capacitor Sample Application
 
-for this project to work, I am runninng the vue application on local server and the ios project is loading the applictaion from there.
+- Using VueJS for basic application
+- Geolocation Plugin
+- Camera Plugin
+- Live Reload Is Enabled
+
+### Important - Live Reload
+For this project to work, I am runninng the vue application on local server and the ios project is loading the applictaion from there.
 
 ```
 {
@@ -26,6 +32,25 @@ npm run serve
 And the start the ios project using the capacitor commands
 ```
 npx cap sync; npx cap open ios
+```
+
+### Turning Off Live Reload
+Just remove the whole server.url section from the `capacitor.config.json` file
+```json
+{
+  "appId": "com.aks.vuehw",
+  "appName": "vuehw",
+  "bundledWebRuntime": false,
+  "webDir": "dist",
+    "server": {
+      "allowNavigation": [
+        "example.org",
+        "*.example.org",
+        "192.0.2.1",
+        "mapbox.com"
+      ]
+    }
+}
 ```
 
 ## Project setup
