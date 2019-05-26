@@ -30,7 +30,7 @@ export default {
   name: "CameraPage",
   data() {
     return {
-      msg: "Welcome to Your Vue.js App",
+      msg: "Welcome to Your Vue Capacitor App",
       imageUrl: null
     };
   },
