@@ -69,7 +69,7 @@ npx cap sync; npx cap open ios
 ```
 
 ### Turning Off Live Reload
-Just remove the whole server.url section from the `capacitor.config.json` file
+Just remove the whole `server.url` section from the `capacitor.config.json` file
 ```json
 {
   "appId": "com.aks.vuehw",
@@ -77,6 +77,7 @@ Just remove the whole server.url section from the `capacitor.config.json` file
   "bundledWebRuntime": false,
   "webDir": "dist",
     "server": {
+      "url": "http://localhost:8080", // REMOVE THIS LINE TO TURN OFF LIVE RELOAD  
       "allowNavigation": [
         "example.org",
         "*.example.org",
