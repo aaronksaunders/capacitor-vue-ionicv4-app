@@ -1,0 +1,14 @@
+{
+  "appId": "com.aks.vuehw",
+  "appName": "vuehw",
+  "bundledWebRuntime": false,
+  "webDir": "dist",
+    "server": {
+      "allowNavigation": [
+        "example.org",
+        "*.example.org",
+        "192.0.2.1",
+        "mapbox.com"
+      ]
+    }
+}
