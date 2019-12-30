@@ -13,7 +13,6 @@ export default {
 </script>
 
 <style>
-<style>
 ion-navbar.toolbar.toolbar-ios.statusbar-padding,
 ion-navbar.toolbar-ios ion-title.title-ios,
 ion-toolbar.toolbar.toolbar-ios.statusbar-padding,
@@ -21,5 +20,4 @@ ion-toolbar.toolbar-ios ion-title.title-ios {
   padding-top: constant(safe-area-inset-top);
   padding-top: env(safe-area-inset-top);
 }
-</style>
 </style>

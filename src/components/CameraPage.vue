@@ -17,11 +17,11 @@
 <script>
 import {
   Plugins,
-  Capacitor,
   CameraSource,
-  CameraResultType
+  CameraResultType,
 } from "@capacitor/core";
 const { Camera } = Plugins;
+
 
 export default {
   name: "CameraPage",
@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     scan() {
-      window.plugins.barcodeScanner.scan(
+       window.cordova.plugins.barcodeScanner.scan(
         function(result) {
           alert(
             "We got a barcode\n" +
