@@ -1,11 +1,11 @@
 import Vue from 'vue'
-import Router from 'vue-router'
+import {IonicVueRouter} from '@ionic/vue'
 import CameraPage from '@/components/CameraPage'
 import GeolocationPage from '@/components/GeolocationPage'
 
-Vue.use(Router)
+Vue.use(IonicVueRouter)
 
-export default new Router({
+export default new IonicVueRouter({
   routes: [
     {
       path: '/',

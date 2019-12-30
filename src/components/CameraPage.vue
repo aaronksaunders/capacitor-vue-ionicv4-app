@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     scan() {
-      cordova.plugins.barcodeScanner.scan(
+      window.plugins.barcodeScanner.scan(
         function(result) {
           alert(
             "We got a barcode\n" +

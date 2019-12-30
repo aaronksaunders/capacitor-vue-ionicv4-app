@@ -1,6 +1,6 @@
 <template>
   <ion-app>
-    <router-view></router-view>
+    <ion-vue-router />
   </ion-app>
 </template>
 
@@ -8,8 +8,8 @@
 <style src='@ionic/core/css/ionic.bundle.css'></style>
 <script>
 export default {
-  name: 'App'
-}
+  name: "App"
+};
 </script>
 
 <style>
