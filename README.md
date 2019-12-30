@@ -44,7 +44,20 @@ and then the magic happened
 <img src="https://raw.githubusercontent.com/aaronksaunders/capacitor-vue-ionicv4-app/master/Screen%20Shot%202019-05-25%20at%204.57.18%20PM.png" width='40%'>
 <img src="https://raw.githubusercontent.com/aaronksaunders/capacitor-vue-ionicv4-app/master/Screen%20Shot%202019-05-25%20at%204.49.02%20PM.png" width='40%'>
   </p>
-  
+
+### Running Capacitor
+```
+npm run build
+```
+```
+npx cap add <platform>
+```
+```
+npx cap sync <platform>
+```
+```
+npx cap open <platform>
+```
   
 ### Adding A Non Capacitor Plugin
 I am testing with the [Barcode Scanner Plugin](https://github.com/phonegap/phonegap-plugin-barcodescanner), you will need to install the plugin using `npm`
