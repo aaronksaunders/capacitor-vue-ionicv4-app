@@ -1,4 +1,5 @@
 # VueJS Ionic Capacitor Sample Application
+> updated 12/30/2019
 
 ### Other Ionic Vue Samples
 - https://github.com/aaronksaunders/ionic4-vue-tabs
