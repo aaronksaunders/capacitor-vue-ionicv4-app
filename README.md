@@ -75,10 +75,25 @@ window.cordova.plugins.barcodeScanner.scan(
 ```
 
 ### Important - Live Reload
-For this project to work, I am runninng the vue application on local server and the ios project is loading the applictaion from there.
+For this project to work, I am running the vue application on local server and the ios project is loading the application from there.
 
-to make live reload work, you need to configure your `capacitor.config.json` file, see documentation here on Ionic Website: https://capacitor.ionicframework.com/docs/basics/configuring-your-app/
+To make live reload work, you need to configure your `capacitor.config.json` file, see documentation here on Ionic Website: https://capacitor.ionicframework.com/docs/basics/configuring-your-app/
 
+Then you run your application as you would normally using the following command
+```
+npm run serve
+```
+In most situations, the application will be running on `localhost:8080` so the settings below should work. What I usually do is utilize the actual IP address of my computer when running so that I can test on a real device that is on the same network.
+
+#### Live Reload Android Issues
+**When using Android**, to get live reload to work, you might need to update your `AndroidManifest.xml` file; it can be found here: `android/app/src/main/AndroidManifest.xml`.
+
+Then update the application tag to include `usesCleartextTraffic`
+```xml
+<application android:usesCleartextTraffic="true">
+```
+
+This is what the `capacitor.config.json` file shoudl look like when attempting to develop using live-reload
 ```
 {
   "appId": "com.aks.vuehw",
@@ -124,31 +139,3 @@ Just remove the whole `server.url` section from the `capacitor.config.json` file
     }
 }
 ```
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
