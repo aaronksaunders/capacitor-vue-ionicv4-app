@@ -10,8 +10,9 @@
 ### Sample Overview
 
 - Using VueJS for basic application
-- Geolocation Plugin
-- Camera Plugin
+- Capacitor Geolocation Plugin
+- Capacitor Camera Plugin
+- Cordova Barcode Scanner Plugin
 - Live Reload Is Enabled
 
 ### Camera Working In PWA/Website
@@ -26,13 +27,9 @@ Then opened up the `main.js` file in my vue project and made the following chang
 ```javascript
 import { defineCustomElements } from '@ionic/pwa-elements/loader'; // <== NEW
 
-
 Vue.config.productionTip = false;
 
 Vue.use(Ionic);
-Vue.use(VeeValidate);
-// check if there is actually a user that has been
-// saved by previous instance of Firebase...
   new Vue({
     router,
     render: h => h(App)
@@ -47,9 +44,26 @@ and then the magic happened
 <img src="https://raw.githubusercontent.com/aaronksaunders/capacitor-vue-ionicv4-app/master/Screen%20Shot%202019-05-25%20at%204.57.18%20PM.png" width='40%'>
 <img src="https://raw.githubusercontent.com/aaronksaunders/capacitor-vue-ionicv4-app/master/Screen%20Shot%202019-05-25%20at%204.49.02%20PM.png" width='40%'>
   </p>
+  
+  
+### Adding A Non Capacitor Plugin
+I am testing with the [Barcode Scanner Plugin](https://github.com/phonegap/phonegap-plugin-barcodescanner), you will need to install the plugin using `npm`
+```
+npm install phonegap-plugin-barcodescanner
+```
+and then in the source code you get access to the plugin off of the `window` object
+```javascript
+window.cordova.plugins.barcodeScanner.scan(
+  function(result) { /* success */ },
+  function(error) { /* error */ },
+  { /* settings */ }
+  );
+```
 
 ### Important - Live Reload
 For this project to work, I am runninng the vue application on local server and the ios project is loading the applictaion from there.
+
+to make live reload work, you need to configure your `capacitor.config.json` file, see documentation here on Ionic Website: https://capacitor.ionicframework.com/docs/basics/configuring-your-app/
 
 ```
 {
