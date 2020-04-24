@@ -1,6 +1,16 @@
 # VueJS Ionic Capacitor Sample Application
 > updated 12/30/2019
 
+---
+<p align="center">
+<img src="https://raw.githubusercontent.com/aaronksaunders/capacitor-vue-ionicv4-app/master/Screen%20Shot%202020-04-23%20at%209.33.16%20PM.png" width="66%" />
+  </p>
+  <p align="center">
+  <strong><a href="https://www.youtube.com/playlist?list=PL2PY2-9rsgl2bgNTX9omlDisiWh1NYInz">Click To View Ionic VueJS Video Playlist</a></strong>
+  </p>
+---
+
+
 ### Other Ionic Vue Samples
 - https://github.com/aaronksaunders/ionic4-vue-tabs
 - https://github.com/aaronksaunders/icon-vue
