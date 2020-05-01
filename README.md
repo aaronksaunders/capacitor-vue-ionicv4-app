@@ -1,5 +1,27 @@
 # VueJS Ionic Capacitor Sample Application
-> updated 12/30/2019
+> updated 4/30/2020
+```
+Ionic:
+
+   Ionic CLI       : 6.6.0 (/Users/aaronksaunders/.nvm/versions/node/v13.5.0/lib/node_modules/@ionic/cli)
+   Ionic Framework : @ionic/vue 0.0.9
+
+Capacitor:
+
+   Capacitor CLI   : 2.0.2
+   @capacitor/core : 2.0.2
+
+Utility:
+
+   cordova-res (update available: 0.14.0) : 0.11.0
+   native-run                             : 1.0.0
+
+System:
+
+   NodeJS : v13.5.0 (/Users/aaronksaunders/.nvm/versions/node/v13.5.0/bin/node)
+   npm    : 6.14.1
+   OS     : macOS Catalina
+```
 
 ---
 <p align="center">
