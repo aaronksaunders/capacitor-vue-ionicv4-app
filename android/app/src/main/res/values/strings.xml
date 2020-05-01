@@ -1,8 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">vuehw</string>
-    <string name="title_activity_main">vuehw</string>
-    <string name="package_name">com.aks.vuehw</string>
-    <string name="fileprovider_authority">com.aks.vuehw.fileprovider</string>
-    <string name="custom_url_scheme">com.aks.vuehw</string>
-</resources>
