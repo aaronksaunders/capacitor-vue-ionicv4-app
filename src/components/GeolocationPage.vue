@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { Plugins, GeolocationOptions } from "@capacitor/core";
+import { Plugins } from "@capacitor/core";
 const { Geolocation } = Plugins;
 
 export default {
@@ -46,7 +46,8 @@ export default {
         timeout: 30000
       });
       console.log("location", location.coords);
-      this.location = location.coords.latitude + " " + location.coords.longitude ;
+      this.location =
+        location.coords.latitude + " " + location.coords.longitude;
     }
   }
 };

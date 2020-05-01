@@ -1,0 +1,8 @@
+{
+    "name": "vuehw",
+    "integrations": {
+      "capacitor": {}
+    },
+    "type": "vue"
+  }
+  
