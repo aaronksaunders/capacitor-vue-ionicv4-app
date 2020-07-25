@@ -89,6 +89,9 @@ export default {
         }
       }
     }
+  },
+  activated() {
+    console.log("activated")
   }
 };
 </script>

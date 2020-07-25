@@ -12,6 +12,10 @@
       <h2>This is the Second Page</h2>
       <div>Showing the use of the location plugin and the vue-router for changing pages in the application</div>
       <pre>{{location}}</pre>
+      <div>
+        <p>test call number plugin</p>
+        <ion-button @click="callNumber"></ion-button>
+      </div>
     </ion-content>
   </div>
 </template>
@@ -20,18 +24,26 @@
 import { Plugins } from "@capacitor/core";
 const { Geolocation } = Plugins;
 
+// Call Number Plugin
+import { CallNumber } from "@ionic-native/call-number";
+
 export default {
   name: "GeolocationPage",
   data() {
     return {
       msg: "Welcome to Your Vue.js App",
-      location: {}
+      location: {},
     };
   },
   created() {
     this.getLocation();
   },
   methods: {
+    callNumber() {
+      CallNumber.callNumber("2025551212")
+        .then((res) => console.log("Launched dialer!", res))
+        .catch((err) => console.log("Error launching dialer", err));
+    },
     goBack() {
       this.$router.go(-1);
     },
@@ -43,13 +55,13 @@ export default {
 
       let location = await Geolocation.getCurrentPosition({
         enableHighAccuracy: true,
-        timeout: 30000
+        timeout: 30000,
       });
       console.log("location", location.coords);
       this.location =
         location.coords.latitude + " " + location.coords.longitude;
-    }
-  }
+    },
+  },
 };
 </script>
 
