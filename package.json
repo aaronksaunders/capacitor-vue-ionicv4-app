@@ -21,7 +21,7 @@
     "@ionic/vue": "0.0.9",
     "call-number": "^1.0.1",
     "core-js": "3.6.5",
-    "moment": "2.24.0",
+    "moment": "2.29.2",
     "phonegap-plugin-barcodescanner": "^8.1.0",
     "vee-validate": "3.3.0",
     "vue": "2.6.11",
